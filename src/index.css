@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --font-editorial: "DM Serif Display", serif;
+  --font-playfair: "Playfair Display", serif;
+  --font-courier: "Courier Prime", monospace;
+  --font-sharetech: "Share Tech Mono", monospace;
+}
+
 :root {
   --bg-cement: #e2dbce;
   --raw-black: #0a0a0a;
