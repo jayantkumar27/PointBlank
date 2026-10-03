@@ -14,6 +14,9 @@ export default function SpeechLab() {
   const [audioLevel, setAudioLevel] = useState([35, 75, 45, 90, 60, 20, 80, 50, 65, 30, 85, 40]);
   const [errorMsg, setErrorMsg] = useState('');
 
+  const [timeSpent, setTimeSpent] = useState("00:00");
+  const [currentTime, setCurrentTime] = useState("");
+
   const isRecording = appState === 'SPEAK';
   const isAnalyzing = appState === 'ANALYZING';
 
@@ -35,6 +38,21 @@ export default function SpeechLab() {
   }, []);
 
   useEffect(() => {
+    let secondsSpent = 0;
+    setCurrentTime(new Date().toLocaleTimeString());
+
+    const interval = setInterval(() => {
+      secondsSpent += 1;
+      const minutes = Math.floor(secondsSpent / 60);
+      const seconds = secondsSpent % 60;
+      setTimeSpent(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+      setCurrentTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       setErrorMsg("YOUR PATHETIC BROWSER DOES NOT SUPPORT SPEECH RECOGNITION. UPGRADE IMMEDIATELY.");
@@ -43,7 +61,12 @@ export default function SpeechLab() {
       recognition.continuous = true;
       recognition.interimResults = true;
       
+      recognition.onstart = () => {
+         setErrorMsg('');
+      };
+
       recognition.onresult = (event) => {
+        setErrorMsg('');
         let finalTranscript = '';
         for (let i = event.resultIndex; i < event.results.length; ++i) {
           if (event.results[i].isFinal) {
@@ -59,11 +82,10 @@ export default function SpeechLab() {
         console.error("Speech recognition error:", event.error);
         if (event.error === 'not-allowed') {
            setErrorMsg("MICROPHONE ACCESS DENIED. COWARD. ENABLE IT TO PROCEED.");
-        } else {
+           if (appState === 'SPEAK') setAppState('IDLE');
+        } else if (event.error === 'audio-capture' || event.error === 'network') {
            setErrorMsg(`SPEECH RECOGNITION FAILED: ${event.error.toUpperCase()}`);
-        }
-        if (appState === 'SPEAK') {
-          setAppState('IDLE');
+           if (appState === 'SPEAK') setAppState('IDLE');
         }
       };
 
@@ -84,10 +106,10 @@ export default function SpeechLab() {
     return () => clearInterval(interval);
   }, [isRecording]);
 
-  // Main countdown timer logic for Prep and Speak phases
+  // Main countdown timer logic for Prep, Organize, and Speak phases
   useEffect(() => {
     let timerId = null;
-    if (appState === 'PREP' || appState === 'SPEAK') {
+    if (appState === 'PREP' || appState === 'ORGANIZE' || appState === 'SPEAK') {
       timerId = setInterval(() => {
         setTimeLeft(prev => {
           if (prev <= 1) {
@@ -102,10 +124,13 @@ export default function SpeechLab() {
     return () => {
       if (timerId) clearInterval(timerId);
     };
-  }, [appState]);
+  }, [appState, selectedTime]);
 
   const handlePhaseComplete = (completedPhase) => {
     if (completedPhase === 'PREP') {
+      setAppState('ORGANIZE');
+      setTimeLeft(10);
+    } else if (completedPhase === 'ORGANIZE') {
       setAppState('SPEAK');
       setTimeLeft(selectedTime);
       transcriptRef.current = '';
@@ -145,12 +170,13 @@ export default function SpeechLab() {
          setAppState('RESULT');
          setFeedbackData({
             isFail: true,
-            grade: "F-",
-            verdict: "TOTAL SILENCE",
+            grade: "F",
+            verdict: "PREP FRAMEWORK FAILURE",
             score: "0/100",
-            breakdown: "NO WORDS DETECTED. SILENCE IS NOT A STRATEGY.",
-            critique: "YOU DID NOT SPEAK A SINGLE WORD. ARE YOU PARALYZED BY FEAR?",
-            harshTip: "FIX: OPEN YOUR MOUTH AND VIBRATE YOUR VOCAL CORDS."
+            breakdown: "POINT: NO | REASON: NO | EXAMPLE: NO | CONCLUSION: NO",
+            critique: "You didn't say a single word. Silence isn't a communication strategy. Absolute failure.",
+            harshTip: "FIX: FOLLOW THE DAMN PREP FRAMEWORK. DO NOT SKIP STEPS.",
+            rewrite: "N/A"
          });
          setShakeScreen(true);
          setStreak(prev => {
@@ -308,9 +334,9 @@ export default function SpeechLab() {
                 MODE: PRESSURE COOKER
               </div>
               
-              <div className="bg-[#ffffff] text-[#121212] p-3 border-4 border-[#121212] flex items-center justify-between shadow-brutal-sm">
-                <span className="text-xs font-black tracking-widest uppercase">CLOCK:</span>
-                <span className="font-mono-brutal font-black text-xl text-[#d91b00]">REMAINING: {timeLeft}S</span>
+              <div className="bg-[#ffffff] text-[#121212] p-3 border-4 border-[#121212] flex items-center justify-center shadow-brutal-sm">
+                <span className="text-xl font-black tracking-widest uppercase">SESSION TIME:</span>
+                <span className="font-mono-brutal font-black text-xl text-[#d91b00]">{timeSpent}</span>
               </div>
 
               <div className="bg-[#121212] text-[#ffdd00] px-3 py-2 text-xs font-black uppercase tracking-wider border-2 border-[#121212]">
@@ -318,12 +344,11 @@ export default function SpeechLab() {
               </div>
             </div>
 
-            <button 
-              onClick={manualTriggerHarsh} 
-              className="w-full bg-[#d91b00] text-white font-black text-sm py-3 px-4 border-4 border-[#121212] active:translate-x-1 active:translate-y-1 shadow-brutal-sm uppercase hover:bg-black transition-none cursor-pointer"
+            <div 
+              className="w-full bg-[#d91b00] text-white font-black text-xl py-3 px-4 border-4 border-[#121212] shadow-brutal-sm uppercase text-center"
             >
-              TEST HARSH REACTION
-            </button>
+              {currentTime}
+            </div>
           </div>
 
         </div>
@@ -373,23 +398,33 @@ export default function SpeechLab() {
             <div className="my-6 w-full flex flex-col items-center">
               
               {currentTopic && (
-                <div className="bg-[#ffdd00] border-4 border-[#121212] p-6 w-full max-w-2xl mb-8 shadow-brutal-sm text-center">
-                   <h3 className="text-2xl md:text-4xl font-black font-serif-brutal text-[#121212] uppercase tracking-tight mb-2">
-                     {currentTopic.title}
-                   </h3>
-                   <p className="text-sm md:text-base font-bold font-mono-brutal text-[#121212]">
-                     {currentTopic.summary}
-                   </p>
+                <div className={`border-4 border-[#121212] p-6 w-full max-w-2xl mb-8 shadow-brutal-sm text-center flex flex-col gap-4 ${appState === 'PREP' ? 'bg-[#ffdd00]' : appState === 'ORGANIZE' ? 'bg-[#ff5500]' : 'bg-[#e2dbce]'}`}>
+                   <div>
+                     <h3 className="text-2xl md:text-4xl font-black font-serif-brutal text-[#121212] uppercase tracking-tight mb-2">
+                       {currentTopic.title}
+                     </h3>
+                     {appState !== 'PREP' && (
+                       <p className="text-sm md:text-base font-bold font-mono-brutal text-[#121212]">
+                         {currentTopic.summary}
+                       </p>
+                     )}
+                   </div>
+                   {appState === 'PREP' && currentTopic.definition && (
+                     <div className="bg-[#121212] text-white p-4 border-2 border-[#121212] shadow-brutal-sm text-left">
+                       <span className="text-xs font-black uppercase tracking-widest text-[#ffdd00] block mb-1">DEFINITION:</span>
+                       <span className="font-mono-brutal font-bold text-sm">{currentTopic.definition}</span>
+                     </div>
+                   )}
                 </div>
               )}
 
               {/* Timer Display */}
               <div className="flex flex-col items-center mb-6">
-                <div className="bg-[#ffffff] border-4 border-[#121212] px-6 py-4 flex flex-col items-center shadow-brutal-sm">
-                  <span className={`text-sm font-black tracking-widest uppercase mb-1 ${appState === 'PREP' ? 'text-[#0038ff]' : 'text-[#d91b00]'}`}>
-                    {appState === 'PREP' ? 'PREPARATION TIME' : appState === 'SPEAK' ? 'SPEAKING TIME' : 'ANALYZING...'}
+                <div className={`border-4 border-[#121212] px-6 py-4 flex flex-col items-center shadow-brutal-sm ${appState === 'PREP' ? 'bg-[#ffdd00]' : appState === 'ORGANIZE' ? 'bg-[#ff5500]' : appState === 'SPEAK' ? 'bg-[#d91b00]' : 'bg-[#ffffff]'}`}>
+                  <span className={`text-sm font-black tracking-widest uppercase mb-1 ${appState === 'SPEAK' ? 'text-[#ffdd00]' : 'text-[#121212]'}`}>
+                    {appState === 'PREP' ? 'STAGE 1: COMPREHENSION' : appState === 'ORGANIZE' ? 'STAGE 2: ORGANIZE THOUGHTS' : appState === 'SPEAK' ? 'STAGE 3: EXECUTION' : 'ANALYZING...'}
                   </span>
-                  <span className="font-mono-brutal font-black text-6xl text-[#121212]">
+                  <span className={`font-mono-brutal font-black text-6xl ${appState === 'SPEAK' ? 'text-white' : 'text-[#121212]'}`}>
                     {appState === 'ANALYZING' ? '---' : timeLeft + 's'}
                   </span>
                 </div>
