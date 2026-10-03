@@ -6,6 +6,7 @@ export default function SpeechLab() {
   const [appState, setAppState] = useState('IDLE'); // IDLE, PREP, SPEAK, ANALYZING, RESULT
   const [currentTopic, setCurrentTopic] = useState(null);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [selectedTime, setSelectedTime] = useState(90);
 
   const [streak, setStreak] = useState(0);
   const [feedbackData, setFeedbackData] = useState(null);
@@ -106,7 +107,7 @@ export default function SpeechLab() {
   const handlePhaseComplete = (completedPhase) => {
     if (completedPhase === 'PREP') {
       setAppState('SPEAK');
-      setTimeLeft(90);
+      setTimeLeft(selectedTime);
       transcriptRef.current = '';
       if (recognitionRef.current) {
         try {
@@ -164,7 +165,7 @@ export default function SpeechLab() {
       try {
         const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
         
-        let sysInstruction = "You are a brutally honest, unforgiving English communication coach. Read the user's transcript and evaluate it strictly against the PREP (Point, Reason, Example, Point) framework. Do not over-correct minor grammar; focus entirely on their logical structure. If they ramble or miss a step, give them brutal, harsh, and direct feedback. Output ONLY a JSON object containing: a boolean for each PREP stage (has_point, has_reason, has_example, has_point_conclusion) and a 'brutal_feedback' string.";
+        let sysInstruction = "You are a brutally honest, unforgiving English communication coach. Read the user's transcript and evaluate it strictly against the PREP (Point, Reason, Example, Point) framework. Do not over-correct minor grammar; focus entirely on their logical structure. If they ramble or miss a step, give them brutal, harsh, and direct feedback. In addition to your strict boolean evaluation and brutal feedback, you must act as a master speechwriter. Take the user's messy transcript and rewrite it into a highly polished, presentable, and articulate speech that perfectly follows the PREP framework. Output ONLY a JSON object containing: a boolean for each PREP stage (has_point, has_reason, has_example, has_point_conclusion), a 'brutal_feedback' string, and a 'presentable_rewrite' string.";
 
         if (isCutOff) {
             sysInstruction += " If the text abruptly cuts off, you must fail them for missing the final Point/Conclusion of the PREP framework, as they ran out of time.";
@@ -201,7 +202,8 @@ export default function SpeechLab() {
             score: `${prepScore * 25}/100`,
             breakdown: `POINT: ${parsed.has_point ? 'YES' : 'NO'} | REASON: ${parsed.has_reason ? 'YES' : 'NO'} | EXAMPLE: ${parsed.has_example ? 'YES' : 'NO'} | CONCLUSION: ${parsed.has_point_conclusion ? 'YES' : 'NO'}`,
             critique: parsed.brutal_feedback,
-            harshTip: isFail ? "FIX: FOLLOW THE DAMN PREP FRAMEWORK. DO NOT SKIP STEPS." : "FIX: MAINTAIN THIS BARE MINIMUM STANDARD."
+            harshTip: isFail ? "FIX: FOLLOW THE DAMN PREP FRAMEWORK. DO NOT SKIP STEPS." : "FIX: MAINTAIN THIS BARE MINIMUM STANDARD.",
+            rewrite: parsed.presentable_rewrite
         });
         
         if (isFail) {
@@ -252,7 +254,7 @@ export default function SpeechLab() {
       <header className="w-full bg-[#121212] text-[#ffdd00] border-b-8 border-[#121212] px-6 py-4 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="bg-[#0038ff] text-[#ffffff] font-black px-4 py-2 text-2xl tracking-tighter border-4 border-[#121212] shadow-brutal-sm">
-            RAW SPEECH AI
+            POINTBLANK
           </div>
           <div className="text-sm tracking-widest text-[#e2dbce] uppercase font-bold border-l-4 border-[#ffdd00] pl-4 hidden md:block">
             UNFORGIVING ORAL COACH // ZERO SOFT CRITICISM
@@ -340,10 +342,29 @@ export default function SpeechLab() {
           </div>
 
           {appState === 'IDLE' || appState === 'RESULT' ? (
-            <div className="my-8 flex flex-col items-center gap-6">
+            <div className="my-8 flex flex-col items-center gap-6 w-full max-w-lg">
+              <h2 className="text-white text-3xl md:text-5xl font-black font-serif-brutal uppercase text-center mb-2">
+                READY FOR A NEW TOPIC?
+              </h2>
+
+              <div className="flex flex-col items-center gap-2 mb-4 w-full">
+                <span className="text-[#ffdd00] font-black tracking-widest text-sm uppercase">SELECT SPEAKING TIME:</span>
+                <div className="flex w-full gap-4">
+                   {[50, 70, 90].map(t => (
+                     <button
+                       key={t}
+                       onClick={() => setSelectedTime(t)}
+                       className={`flex-1 font-black text-xl md:text-2xl py-3 border-4 border-[#121212] transition-none shadow-brutal-sm ${selectedTime === t ? 'bg-[#d91b00] text-white' : 'bg-[#e2dbce] text-[#121212] hover:bg-[#ffdd00]'}`}
+                     >
+                       {t}s
+                     </button>
+                   ))}
+                </div>
+              </div>
+
               <button 
                 onClick={startChallenge}
-                className="bg-[#ffdd00] text-[#121212] font-black text-2xl md:text-4xl uppercase px-8 py-6 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-x-[8px] active:translate-y-[8px] active:shadow-none transition-all cursor-pointer select-none"
+                className="w-full bg-[#ffdd00] text-[#121212] font-black text-2xl md:text-4xl uppercase px-8 py-6 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-x-[8px] active:translate-y-[8px] active:shadow-none transition-all cursor-pointer select-none"
               >
                 START CHALLENGE
               </button>
@@ -460,6 +481,18 @@ export default function SpeechLab() {
                     </p>
                   </div>
                 </div>
+
+                {/* Presentable Rewrite Box */}
+                {feedbackData.rewrite && (
+                  <div className="bg-white border-4 border-[#121212] p-6 text-[#121212] font-serif-brutal shadow-brutal-sm mt-4">
+                    <div className="text-xs font-black text-white bg-[#0038ff] inline-block px-2 py-1 uppercase tracking-wider mb-3 border-2 border-[#121212]">
+                      MASTER SPEECHWRITER // PRESENTABLE REWRITE
+                    </div>
+                    <p className="text-base md:text-lg font-bold leading-relaxed whitespace-pre-wrap">
+                      {feedbackData.rewrite}
+                    </p>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center text-center p-8 text-[#e2dbce]">
