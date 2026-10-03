@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PointBlank — Stop Rambling.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&amp;family=Playfair+Display:ital,wght@0,900;1,900&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cement: #e2dbce;
+      --raw-black: #0a0a0a;
+      --charcoal: #171717;
+      --hazard-yellow: #ffdd00;
+      --harsh-red: #d91b00;
+      --stark-white: #f5f5f0;
+      --safety-blue: #0038ff;
+    }
+    * {
+      border-radius: 0px !important;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--bg-cement);
+      color: var(--raw-black);
+      font-family: 'Share Tech Mono', monospace;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-serif-heavy {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 900;
+    }
+    .font-mono-harsh {
+      font-family: 'Courier Prime', Courier, monospace;
+    }
+    .border-brutal-4 {
+      border: 4px solid #000000;
+    }
+    .border-brutal-6 {
+      border: 6px solid #000000;
+    }
+    .border-brutal-8 {
+      border: 8px solid #000000;
+    }
+    .hazard-stripe {
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffdd00,
+        #ffdd00 18px,
+        #000000 18px,
+        #000000 36px
+      );
+    }
+    /* Dramatic structural brutal shift on click, NO hover animation */
+    .btn-brutal-massive {
+      display: inline-block;
+      text-align: center;
+      background-color: var(--hazard-yellow);
+      color: #000000;
+      border: 6px solid #000000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-brutal-massive:active {
+      transform: translate(6px, 6px);
+      background-color: var(--harsh-red);
+      color: #ffffff;
+    }
+    .btn-brutal-secondary:active {
+      transform: translate(4px, 4px);
+    }
+  </style>
+</head>
+<body class="bg-[#e2dbce] text-[#0a0a0a] min-h-screen">
+
+  <!-- TOP HAZARD TAPE HEADER -->
+  <div class="w-full h-4 hazard-stripe border-b-4 border-black"></div>
+
+  <!-- NAVIGATION / TOP META BAR -->
+  <header class="w-full bg-[#0a0a0a] text-[#ffdd00] border-b-4 border-black px-4 py-3 sm:px-8">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <span class="bg-[#0038ff] text-white px-3 py-1 text-xl sm:text-2xl font-bold tracking-widest border-2 border-black font-mono-harsh">POINTBLANK</span>
+        <span class="text-xs sm:text-sm tracking-wider uppercase text-neutral-300 hidden md:inline">SYSTEM ARCHITECTURE // DIRECT ORAL AUDIT</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="bg-[#d91b00] text-white px-3 py-1 text-xs sm:text-sm font-bold border-2 border-black uppercase tracking-wider">STATUS: ACTIVE</span>
+        <span class="bg-[#ffdd00] text-black px-3 py-1 text-xs sm:text-sm font-bold border-2 border-black uppercase tracking-wider">VERSION 2.4</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER CONTAINER -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-12">
+
+    <!-- HERO SECTION -->
+    <section class="border-brutal-6 bg-[#ffdd00] p-6 sm:p-10 md:p-14 relative">
+      <div class="inline-block bg-[#0a0a0a] text-[#ffdd00] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest uppercase mb-6 border-2 border-black">
+        PROTOCOL 001 // ORAL COMMUNICATION RECONSTRUCTION
+      </div>
+
+      <h1 class="font-serif-heavy text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tight uppercase text-black mb-6">
+        STOP RAMBLING.
+      </h1>
+
+      <p class="font-mono-harsh text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-tight text-black max-w-3xl mb-10 pb-6 border-b-4 border-black">
+        The brutally honest AI speech coach.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-6">
+        <!-- Massive Start Practicing Button -->
+        <a href="#who-what" class="btn-brutal-massive px-8 py-6 text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight font-serif-heavy text-black border-brutal-6">
+          START PRACTICING
+        </a>
+        <div class="bg-[#0a0a0a] text-white p-4 border-brutal-4 font-mono-harsh text-xs sm:text-sm flex flex-col justify-center">
+          <span class="text-[#ffdd00] font-bold">DIRECT DISPATCH:</span>
+          <span>NO SIGNUP. NO ACCOUNTS. RAW MICROPHONE EVALUATION.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO IS IT FOR & WHAT IT DOES -->
+    <section id="who-what" class="space-y-6">
+      <div class="border-brutal-4 bg-[#0a0a0a] text-[#ffdd00] px-4 py-2 flex items-center justify-between">
+        <span class="text-sm font-bold tracking-widest uppercase">AUDIT TARGETS &amp; CORE MECHANISM</span>
+        <span class="text-xs text-neutral-400 uppercase">SECTION 02</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- WHO IS IT FOR (Stark Block 1) -->
+        <div class="border-brutal-6 bg-[#f5f5f0] p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="bg-[#d91b00] text-white inline-block px-3 py-1 font-bold text-xs uppercase mb-4 border-2 border-black">
+              DESIGNATED AUDIENCE
+            </div>
+            <h2 class="font-serif-heavy text-3xl sm:text-4xl text-black uppercase mb-6 leading-none">
+              WHO IS IT FOR
+            </h2>
+            <div class="space-y-4 font-mono-harsh text-base sm:text-lg text-black leading-snug">
+              <p class="border-b-2 border-black pb-3">
+                <span class="font-bold text-black bg-[#ffdd00] px-1 mr-2">GROUP 01</span>
+                Developers explaining complex technical architectures during high-stakes design reviews.
+              </p>
+              <p class="border-b-2 border-black pb-3">
+                <span class="font-bold text-black bg-[#ffdd00] px-1 mr-2">GROUP 02</span>
+                Non-native English speakers fighting hesitation, grammatical doubt, or vocabulary fatigue in executive meetings.
+              </p>
+              <p class="pb-1">
+                <span class="font-bold text-black bg-[#ffdd00] px-1 mr-2">GROUP 03</span>
+                Anyone who freezes, loops, qualifiers-stack, or rambles under acute social and professional pressure.
+              </p>
+            </div>
+          </div>
+          <div class="mt-8 pt-4 border-t-4 border-black bg-[#0a0a0a] text-white p-3 text-xs uppercase tracking-wider">
+            REQUIREMENT: WILLINGNESS TO HEAR UNFILTERED DIAGNOSTICS.
+          </div>
+        </div>
+
+        <!-- WHAT IT DOES (Stark Block 2) -->
+        <div class="border-brutal-6 bg-[#171717] text-white p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="bg-[#0038ff] text-white inline-block px-3 py-1 font-bold text-xs uppercase mb-4 border-2 border-black">
+              EXECUTION ENGINE
+            </div>
+            <h2 class="font-serif-heavy text-3xl sm:text-4xl text-[#ffdd00] uppercase mb-6 leading-none">
+              WHAT IT DOES
+            </h2>
+            <div class="space-y-4 font-mono-harsh text-base sm:text-lg text-neutral-200 leading-snug">
+              <p class="border-b-2 border-neutral-700 pb-3">
+                <span class="text-[#ffdd00] font-bold">1. REAL-TIME ACOUSTIC INTAKE:</span>
+                PointBlank opens a raw audio stream through your system microphone. No cloud storage; direct packet ingestion.
+              </p>
+              <p class="border-b-2 border-neutral-700 pb-3">
+                <span class="text-[#ffdd00] font-bold">2. LOGICAL STRUCTURE EXTRACTION:</span>
+                The evaluator does not care about pleasant tonality. It maps your syntax, argument nodes, thesis defense, and conclusion vectors.
+              </p>
+              <p class="pb-1">
+                <span class="text-[#ffdd00] font-bold">3. INSTANT AUDIT DEPLOYMENT:</span>
+                Every detour, filler word, repetitive qualifier, and circular defense is extracted and scored on screen without sugarcoating.
+              </p>
+            </div>
+          </div>
+          <div class="mt-8 pt-4 border-t-4 border-black bg-[#d91b00] text-white p-3 text-xs uppercase font-bold tracking-wider">
+            ZERO TOLERANCE FOR FLUFF OR CIRCUMLOCUTION.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- THE PRINCIPLE (PREP FRAMEWORK) -->
+    <section class="border-brutal-6 bg-[#0a0a0a] text-white p-6 sm:p-10 md:p-12">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b-4 border-neutral-800">
+        <div>
+          <span class="bg-[#ffdd00] text-black px-3 py-1 font-bold text-xs uppercase border-2 border-black inline-block mb-2">FOUNDATIONAL DOCTRINE</span>
+          <h2 class="font-serif-heavy text-4xl sm:text-5xl md:text-6xl text-white uppercase tracking-tight">
+            THE PRINCIPLE: PREP
+          </h2>
+        </div>
+        <div class="text-right font-mono-harsh text-xs sm:text-sm text-[#ffdd00]">
+          COGNITIVE REDUCTION PROTOCOL<br>
+          FORCE UNYIELDING CLARITY
+        </div>
+      </div>
+
+      <div class="bg-[#ffdd00] text-black p-4 sm:p-6 border-brutal-4 mb-8 font-mono-harsh text-base sm:text-lg font-bold">
+        The PREP Framework strips verbal self-indulgence. By binding your statements into four unbending slots, you eliminate cognitive overload, banish rambling loops, and force structural clarity into every spoken paragraph.
+      </div>
+
+      <!-- PREP 4 BLOCKS (2x2 grid to strictly avoid 3-in-a-row) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- P: Point -->
+        <div class="bg-[#f5f5f0] text-black border-brutal-4 p-6">
+          <div class="flex items-start justify-between mb-3 border-b-2 border-black pb-2">
+            <span class="text-4xl font-serif-heavy text-black font-black">01 // P</span>
+            <span class="bg-[#d91b00] text-white text-xs px-2 py-1 font-bold uppercase border border-black">IMMEDIATE THESIS</span>
+          </div>
+          <h3 class="font-serif-heavy text-2xl uppercase mb-2">POINT</h3>
+          <p class="font-mono-harsh text-sm sm:text-base text-neutral-800 leading-snug">
+            State the bottom line in your very first breath. No background warmups, no defensive prologues, and no historical context before the claim is made.
+          </p>
+        </div>
+
+        <!-- R: Reason -->
+        <div class="bg-[#f5f5f0] text-black border-brutal-4 p-6">
+          <div class="flex items-start justify-between mb-3 border-b-2 border-black pb-2">
+            <span class="text-4xl font-serif-heavy text-black font-black">02 // R</span>
+            <span class="bg-[#0038ff] text-white text-xs px-2 py-1 font-bold uppercase border border-black">LOGICAL DEFENSE</span>
+          </div>
+          <h3 class="font-serif-heavy text-2xl uppercase mb-2">REASON</h3>
+          <p class="font-mono-harsh text-sm sm:text-base text-neutral-800 leading-snug">
+            Give the solitary, decisive argument supporting your point. If you need five reasons, you have none. Deliver the single root cause immediately.
+          </p>
+        </div>
+
+        <!-- E: Example -->
+        <div class="bg-[#f5f5f0] text-black border-brutal-4 p-6">
+          <div class="flex items-start justify-between mb-3 border-b-2 border-black pb-2">
+            <span class="text-4xl font-serif-heavy text-black font-black">03 // E</span>
+            <span class="bg-[#ffdd00] text-black text-xs px-2 py-1 font-bold uppercase border border-black">GROUNDED EVIDENCE</span>
+          </div>
+          <h3 class="font-serif-heavy text-2xl uppercase mb-2">EXAMPLE</h3>
+          <p class="font-mono-harsh text-sm sm:text-base text-neutral-800 leading-snug">
+            Provide a concrete metric, tangible incident, or verified instance. Vague metaphors are flagged as cognitive drift by the evaluation engine.
+          </p>
+        </div>
+
+        <!-- P: Point -->
+        <div class="bg-[#f5f5f0] text-black border-brutal-4 p-6">
+          <div class="flex items-start justify-between mb-3 border-b-2 border-black pb-2">
+            <span class="text-4xl font-serif-heavy text-black font-black">04 // P</span>
+            <span class="bg-[#0a0a0a] text-[#ffdd00] text-xs px-2 py-1 font-bold uppercase border border-black">TERMINAL LOCK</span>
+          </div>
+          <h3 class="font-serif-heavy text-2xl uppercase mb-2">POINT</h3>
+          <p class="font-mono-harsh text-sm sm:text-base text-neutral-800 leading-snug">
+            Restate your core point verbatim. Conclude cleanly. Do not trail off with awkward disclaimers like "so yeah, that is basically it."
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HOW IT HELPS -->
+    <section class="border-brutal-6 bg-[#f5f5f0] p-6 sm:p-10 md:p-12">
+      <div class="border-b-4 border-black pb-6 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <span class="bg-[#d91b00] text-white px-3 py-1 font-bold text-xs uppercase border-2 border-black inline-block mb-2">RETENTION &amp; CONDITIONING</span>
+          <h2 class="font-serif-heavy text-4xl sm:text-5xl text-black uppercase tracking-tight">
+            HOW IT HELPS
+          </h2>
+        </div>
+        <div class="font-mono-harsh text-xs sm:text-sm font-bold bg-[#ffdd00] border-2 border-black px-3 py-1 self-start sm:self-auto">
+          SURGICAL INTERVENTION FOR VERBAL HESITATION
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Ruthless Direct Feedback Column -->
+        <div class="border-brutal-4 bg-[#171717] text-white p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="text-3xl font-serif-heavy text-[#d91b00] uppercase mb-4 pb-2 border-b-2 border-neutral-700">
+              01 // RUTHLESS DIRECT FEEDBACK
+            </div>
+            <p class="font-mono-harsh text-base sm:text-lg text-neutral-200 leading-relaxed mb-6">
+              Conventional coaches flatter you to keep subscriptions alive. PointBlank delivers unapologetic critique. If your premise takes 40 seconds to locate, the system issues a failing mark and quotes your exact filler phrases back to you.
+            </p>
+          </div>
+          <div class="bg-[#d91b00] text-white p-3 font-mono-harsh text-xs uppercase font-bold border-2 border-black">
+            DIAGNOSTIC CRITERIA: CONCISION, COHERENCE, ZERO HEDGING.
+          </div>
+        </div>
+
+        <!-- Daily Streak Enforcement Column -->
+        <div class="border-brutal-4 bg-[#ffdd00] text-black p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="text-3xl font-serif-heavy text-black uppercase mb-4 pb-2 border-b-2 border-black">
+              02 // DAILY STREAK ENFORCEMENT
+            </div>
+            <p class="font-mono-harsh text-base sm:text-lg text-neutral-900 leading-relaxed mb-6">
+              Verbal precision is a muscle memory discipline, not an innate talent. PointBlank enforces a high-visibility daily streak tracker. Miss a day or submit a ramble that fails the threshold, and your streak count resets to zero on notice.
+            </p>
+          </div>
+          <div class="bg-[#0a0a0a] text-[#ffdd00] p-3 font-mono-harsh text-xs uppercase font-bold border-2 border-black">
+            MANDATORY CADENCE: ONE UNBROKEN PITCH ATTEMPT PER 24-HOUR CYCLE.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FINAL LAUNCH CTA STRIP -->
+      <div class="mt-10 border-brutal-6 bg-[#0a0a0a] p-8 text-center text-white">
+        <h3 class="font-serif-heavy text-3xl sm:text-5xl text-[#ffdd00] uppercase mb-4">
+          READY FOR RAW CRITIQUE?
+        </h3>
+        <p class="font-mono-harsh text-base sm:text-lg text-neutral-300 max-w-2xl mx-auto mb-8">
+          No signups. No accounts. Tap the microphone in the speech lab and deliver your unscripted pitch.
+        </p>
+        <a href="#hero" class="btn-brutal-massive px-10 py-5 text-2xl sm:text-3xl font-black uppercase tracking-tight font-serif-heavy text-black border-brutal-6">
+          START PRACTICING NOW
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOTTOM FOOTER -->
+  <footer class="w-full bg-[#0a0a0a] text-neutral-400 border-t-4 border-black px-4 py-8 mt-12">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 font-mono-harsh text-xs sm:text-sm">
+      <div class="flex items-center gap-3">
+        <span class="bg-[#ffdd00] text-black px-2 py-0.5 font-bold border border-black">POINTBLANK</span>
+        <span>STRICT NEO-BRUTALISM ORAL COACH RUNTIME</span>
+      </div>
+      <div class="flex flex-wrap gap-2 text-white">
+        <span class="bg-[#171717] px-2 py-1 border border-neutral-700">SHARP 0PX CORNERS</span>
+        <span class="bg-[#d91b00] px-2 py-1 border border-black">NO SOFT SHADOWS</span>
+        <span class="bg-[#0038ff] px-2 py-1 border border-black">SOLID HIGH CONTRAST</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTTOM HAZARD TAPE FOOTER -->
+  <div class="w-full h-4 hazard-stripe border-t-4 border-black"></div>
+
+
+
+</body></html>

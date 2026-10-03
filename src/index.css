@@ -1,111 +1,154 @@
+@import "tailwindcss";
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --bg-cement: #e2dbce;
+  --raw-black: #0a0a0a;
+  --charcoal: #171717;
+  --hazard-yellow: #ffdd00;
+  --harsh-red: #d91b00;
+  --stark-white: #f5f5f0;
+  --safety-blue: #0038ff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
+  border-radius: 0px !important;
   box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
+body {
+  background-color: var(--bg-cement);
+  color: var(--raw-black);
+  font-family: 'Share Tech Mono', monospace;
   margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+.font-serif-heavy {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 900;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.font-mono-harsh {
+  font-family: 'Courier Prime', Courier, monospace;
+}
+
+.border-brutal-4 {
+  border: 4px solid #000000;
+}
+.border-brutal-6 {
+  border: 6px solid #000000;
+}
+.border-brutal-8 {
+  border: 8px solid #000000;
+}
+
+.hazard-stripe {
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffdd00,
+    #ffdd00 18px,
+    #000000 18px,
+    #000000 36px
+  );
+}
+
+/* Dramatic structural brutal shift on click, NO hover animation */
+.btn-brutal-massive {
+  display: inline-block;
+  text-align: center;
+  background-color: var(--hazard-yellow);
+  color: #000000;
+  border: 6px solid #000000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.btn-brutal-massive:active {
+  transform: translate(6px, 6px);
+  background-color: var(--harsh-red);
+  color: #ffffff;
+}
+
+.btn-brutal-secondary:active {
+  transform: translate(4px, 4px);
+}
+/* Circular mic button exception */
+.mic-circle {
+  border-radius: 9999px !important;
+}
+
+/* Hard solid black offset drop shadows */
+.shadow-brutal-sm {
+  box-shadow: 4px 4px 0px #121212 !important;
+}
+
+.shadow-brutal-streak {
+  box-shadow: 6px 6px 0px #121212 !important;
+}
+
+.shadow-brutal-card {
+  box-shadow: 8px 8px 0px #121212 !important;
+}
+
+.shadow-brutal-mic {
+  box-shadow: 12px 12px 0px #121212 !important;
+}
+
+.shadow-brutal-mic:active {
+  transform: translate(6px, 6px);
+  box-shadow: 6px 6px 0px #121212 !important;
+}
+
+/* Dramatic screen shake keyframes for brutal feedback */
+@keyframes violent-shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-14px, 8px) rotate(-2deg); }
+  20% { transform: translate(16px, -10px) rotate(3deg); }
+  30% { transform: translate(-18px, -4px) rotate(-3deg); }
+  40% { transform: translate(14px, 12px) rotate(2deg); }
+  50% { transform: translate(-10px, -12px) rotate(-1deg); }
+  60% { transform: translate(12px, 6px) rotate(2deg); }
+  70% { transform: translate(-14px, -6px) rotate(-2deg); }
+  80% { transform: translate(10px, 8px) rotate(1deg); }
+  90% { transform: translate(-6px, -4px) rotate(-1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.shake-active {
+  animation: violent-shake 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Heavy bouncy layout shifts when feedback renders */
+@keyframes heavy-bounce-drop {
+  0% {
+    transform: translateY(-80px) scale(0.92);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(28px) scale(1.04);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(-12px) scale(0.98);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.bounce-drop {
+  animation: heavy-bounce-drop 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Mechanical pulsing indicator for recording status */
+@keyframes raw-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.recording-pulse {
+  animation: raw-pulse 0.5s ease-in-out infinite;
 }
