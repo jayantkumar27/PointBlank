@@ -12,7 +12,6 @@ PointBlank solves this by enforcing the **PREP Framework** (Point, Reason, Examp
 
 ## Code
 
-{% github jayantkumar27/PointBlank %}
 
 *(GitHub Repo: [https://github.com/jayantkumar27/PointBlank](https://github.com/jayantkumar27/PointBlank))*
 
