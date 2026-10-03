@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenAI } from '@google/genai';
+import { Link } from 'react-router-dom';
 import { CHALLENGE_TOPICS } from '../topics.js';
 
 export default function SpeechLab() {
@@ -279,9 +280,9 @@ export default function SpeechLab() {
       {/* COMPACT UTILITY TOP BAR WITH RAISED BUTTON-STYLE STREAK */}
       <header className="w-full bg-[#121212] text-[#ffdd00] border-b-8 border-[#121212] px-6 py-4 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="bg-[#0038ff] text-[#ffffff] font-black px-4 py-2 text-2xl tracking-tighter border-4 border-[#121212] shadow-brutal-sm">
+          <Link to="/" className="bg-[#0038ff] text-[#ffffff] font-black px-4 py-2 text-2xl tracking-tighter border-4 border-[#121212] shadow-brutal-sm hover:no-underline">
             POINTBLANK
-          </div>
+          </Link>
           <div className="text-sm tracking-widest text-[#e2dbce] uppercase font-bold border-l-4 border-[#ffdd00] pl-4 hidden md:block">
             UNFORGIVING ORAL COACH // ZERO SOFT CRITICISM
           </div>
@@ -316,7 +317,7 @@ export default function SpeechLab() {
                   STAGE: RAPID RESPONSE
                 </span>
               </div>
-              <h1 className="font-serif-brutal text-3xl md:text-5xl lg:text-6xl text-[#121212] tracking-tight leading-none uppercase">
+              <h1 className="font-serif-heavy font-black text-3xl md:text-5xl lg:text-6xl text-[#121212] tracking-tighter leading-none uppercase">
                 THINK FAST. SPEAK SHARP.
               </h1>
             </div>
